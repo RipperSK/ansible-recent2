@@ -1,0 +1,10 @@
+---
+- name: push bashrc
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: mod /etc/bash.bashrc for debian root
+    ansible.builtin.lineinfile:
+      path: /etc/bash.bashrc
+      line: export PROMPT_COMMAND='log-recent -r $? -c "$(HISTTIMEFORMAT= history 1)" -p $$'
